@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Türkiye Milonga Rehberi - Yüksek Şişe</title>
+    <meta name="description" content="Türkiye'nin en kapsamlı tango milonga listesi. İstanbul, Ankara, İzmir ve diğer şehirlerdeki milonga etkinlikleri.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            overflow: hidden;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            font-weight: 300;
+        }
+
+        .header .subtitle {
+            font-size: 1.4em;
+            opacity: 0.95;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .header .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .filters {
+            padding: 30px 40px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .filter-container {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .filter-group label {
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .filter-select, .search-input {
+            padding: 10px 15px;
+            border: 2px solid #dee2e6;
+            border-radius: 25px;
+            background: white;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .filter-select:focus, .search-input:focus {
+            outline: none;
+            border-color: #ff6b6b;
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+        }
+
+        .search-input {
+            min-width: 250px;
+        }
+
+        .milonga-list {
+            padding: 40px;
+        }
+
+        .milonga-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .milonga-card {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            border: 1px solid #e9ecef;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .milonga-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b6b, #ee5a24, #ff6b6b);
+            background-size: 200% 100%;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: -200% 0; }
+            50% { background-position: 200% 0; }
+        }
+
+        .milonga-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        .milonga-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .milonga-title {
+            font-size: 1.6em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .milonga-city {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.85em;
+            font-weight: 600;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .milonga-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+        }
+
+        .detail-icon {
+            font-size: 1.2em;
+            margin-right: 12px;
+            width: 25px;
+            text-align: center;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #495057;
+            margin-right: 8px;
+        }
+
+        .detail-value {
+            color: #6c757d;
+            flex: 1;
+        }
+
+        .milonga-description {
+            background: linear-gradient(135deg, #f1f3f4, #e8eaed);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+            border-left: 4px solid #ff6b6b;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .phone-btn {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .email-btn {
+            background: linear-gradient(135deg, #ea4335, #d33b2c);
+            color: white;
+            box-shadow: 0 4px 15px rgba(234, 67, 53, 0.3);
+        }
+
+        .website-btn {
+            background: linear-gradient(135deg, #4285f4, #1a73e8);
+            color: white;
+            box-shadow: 0 4px 15px rgba(66, 133, 244, 0.3);
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px;
+            font-size: 1.3em;
+            color: #666;
+        }
+
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #ff6b6b;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error {
+            text-align: center;
+            padding: 60px;
+            color: #dc3545;
+            font-size: 1.2em;
+            background: #f8d7da;
+            border-radius: 10px;
+            margin: 20px;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px;
+            color: #6c757d;
+            font-size: 1.2em;
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 30px 40px;
+            margin-top: 40px;
+        }
+
+        .footer a {
+            color: #ff6b6b;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .api-info {
+            background: #e3f2fd;
+            padding: 20px;
+            margin: 20px 40px;
+            border-radius: 10px;
+            border-left: 4px solid #2196f3;
+        }
+
+        .api-info h3 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+
+        .api-info code {
+            background: #fff;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+
+            .header {
+                padding: 30px 20px;
+            }
+
+            .header h1 {
+                font-size: 2.2em;
+            }
+
+            .header .stats {
+                gap: 20px;
+            }
+
+            .milonga-list {
+                padding: 20px;
+            }
+
+            .milonga-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .milonga-card {
+                padding: 20px;
+            }
+
+            .milonga-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .filter-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-input {
+                min-width: auto;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <h1>🎭 Türkiye Milonga Rehberi</h1>
+                <p class="subtitle">Türkiye'nin en kapsamlı tango milonga listesi</p>
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-number" id="totalMilongas">-</span>
+                        <span class="stat-label">Toplam Milonga</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="totalCities">-</span>
+                        <span class="stat-label">Şehir</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="activeMilongas">-</span>
+                        <span class="stat-label">Aktif Milonga</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="api-info">
+            <h3>📱 iOS Geliştiriciler İçin</h3>
+            <p>Bu verileri iOS uygulamanızda kullanmak için JSON API endpoint'imizi kullanabilirsiniz:</p>
+            <p><code>https://yukselsise.github.io/milonga/milonga.json</code></p>
+        </div>
+
+        <div class="filters">
+            <div class="filter-container">
+                <div class="filter-group">
+                    <label for="cityFilter">🏙️ Şehir:</label>
+                    <select id="cityFilter" class="filter-select">
+                        <option value="">Tüm Şehirler</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="dayFilter">📅 Gün:</label>
+                    <select id="dayFilter" class="filter-select">
+                        <option value="">Tüm Günler</option>
+                        <option value="Pazartesi">Pazartesi</option>
+                        <option value="Salı">Salı</option>
+                        <option value="Çarşamba">Çarşamba</option>
+                        <option value="Perşembe">Perşembe</option>
+                        <option value="Cuma">Cuma</option>
+                        <option value="Cumartesi">Cumartesi</option>
+                        <option value="Pazar">Pazar</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="searchInput">🔍 Ara:</label>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Milonga adı veya semt ara...">
+                </div>
+            </div>
+        </div>
+
+        <div class="milonga-list">
+            <div id="loading" class="loading">
+                Milongalar yükleniyor...
+            </div>
+            <div id="error" class="error" style="display: none;">
+                Milongalar yüklenirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.
+            </div>
+            <div id="noResults" class="no-results" style="display: none;">
+                Arama kriterlerinize uygun milonga bulunamadı. 😔
+            </div>
+            <div id="milongalar" class="milonga-grid">
+                <!-- Milongalar buraya yüklenecek -->
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>💃 <strong>Türkiye Milonga Rehberi</strong> 🕺</p>
+            <p>
+                JSON API: <a href="./milonga.json" target="_blank">milonga.json</a> | 
+                Proje: <a href="https://yukselsise.com" target="_blank">Yüksek Şişe</a>
+            </p>
+            <p style="margin-top: 10px; font-size: 0.9em; opacity: 0.8;">
+                Son güncelleme: <span id="lastUpdate">-</span>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        let allMilongalar = [];
+        let filteredMilongalar = [];
+
+        // Milonga verilerini yükle
+        async function loadMilongalar() {
+            try {
+                const response = await fetch('./milonga.json');
+                if (!response.ok) {
+                    throw new Error('Veri yüklenemedi');
+                }
+                const data = await response.json();
+                allMilongalar = data.milongalar || [];
+                filteredMilongalar = [...allMilongalar];
+                
+                updateStats();
+                populateCityFilter();
+                displayMilongalar(filteredMilongalar);
+                updateLastUpdate(data.sonGuncelleme);
+                document.getElementById('loading').style.display = 'none';
+            } catch (error) {
+                console.error('Hata:', error);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error').style.display = 'block';
+            }
+        }
+
+        // İstatistikleri güncelle
+        function updateStats() {
+            const activeMilongalar = allMilongalar.filter(m => m.aktif);
+            const cities = [...new Set(allMilongalar.map(m => m.sehir))];
+            
+            document.getElementById('totalMilongas').textContent = allMilongalar.length;
+            document.getElementById('totalCities').textContent = cities.length;
+            document.getElementById('activeMilongas').textContent = activeMilongalar.length;
+        }
+
+        // Şehir filtresini doldur
+        function populateCityFilter() {
+            const cities = [...new Set(allMilongalar.map(m => m.sehir))].sort();
+            const cityFilter = document.getElementById('cityFilter');
+            
+            cities.forEach(city => {
+                const option = document.createElement('option');
+                option.value = city;
+                option.textContent = city;
+                cityFilter.appendChild(option);
+            });
+        }
+
+        // Son güncelleme tarihini göster
+        function updateLastUpdate(dateString) {
+            if (dateString) {
+                const date = new Date(dateString);
+                const formatted = date.toLocaleDateString('tr-TR', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                document.getElementById('lastUpdate').textContent = formatted;
+            }
+        }
+
+        // Milongaları filtrele
+        function filterMilongalar() {
+            const cityFilter = document.getElementById('cityFilter').value;
+            const dayFilter = document.getElementById('dayFilter').value;
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+
+            filteredMilongalar = allMilongalar.filter(milonga => {
+                if (!milonga.aktif) return false;
+                
+                const cityMatch = !cityFilter || milonga.sehir === cityFilter;
+                const dayMatch = !dayFilter || milonga.gun === dayFilter;
+                const searchMatch = !searchInput || 
+                    milonga.ad.toLowerCase().includes(searchInput) ||
+                    milonga.semt.toLowerCase().includes(searchInput) ||
+                    milonga.sehir.toLowerCase().includes(searchInput);
+
+                return cityMatch && dayMatch && searchMatch;
+            });
+
+            displayMilongalar(filteredMilongalar);
+        }
+
+        // Milongaları göster
+        function displayMilongalar(milongalar) {
+            const container = document.getElementById('milongalar');
+            const noResults = document.getElementById('noResults');
+            
+            container.innerHTML = '';
+            
+            if (milongalar.length === 0) {
+                noResults.style.display = 'block';
+                return;
+            }
+            
+            noResults.style.display = 'none';
+            
+            milongalar.forEach(milonga => {
+                const milongaCard = document.createElement('div');
+                milongaCard.className = 'milonga-card';
+                
+                milongaCard.innerHTML = `
+                    <div class="milonga-header">
+                        <div>
+                            <div class="milonga-title">${milonga.ad}</div>
+                        </div>
+                        <div class="milonga-city">${milonga.sehir}</div>
+                    </div>
+                    
+                    <div class="milonga-details">
+                        <div class="detail-item">
+                            <span class="detail-icon">📍</span>
+                            <span class="detail-label">Semt:</span>
+                            <span class="detail-value">${milonga.semt}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon">📅</span>
+                            <span class="detail-label">Gün:</span>
+                            <span class="detail-value">${milonga.gun}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon">🕘</span>
+                            <span class="detail-label">Saat:</span>
+                            <span class="detail-value">${milonga.saat} - ${milonga.bitisSaat}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon">💰</span>
+                            <span class="detail-label">Giriş:</span>
+                            <span class="detail-value">${milonga.ucret}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon">📱</span>
+                            <span class="detail-label">Telefon:</span>
+                            <span class="detail-value">${milonga.telefon}</span>
+                        </div>
+                        ${milonga.email ? `
+                        <div class="detail-item">
+                            <span class="detail-icon">✉️</span>
+                            <span class="detail-label">E-posta:</span>
+                            <span class="detail-value">${milonga.email}</span>
+                        </div>` : ''}
+                    </div>
+                    
+                    <div class="detail-item" style="margin-bottom: 15px;">
+                        <span class="detail-icon">🏠</span>
+                        <span class="detail-label">Adres:</span>
+                        <span class="detail-value">${milonga.adres}</span>
+                    </div>
+                    
+                    <div class="milonga-description">
+                        ${milonga.aciklama}
+                    </div>
+                    
+                    <div class="contact-info">
+                        <a href="tel:${milonga.telefon}" class="contact-btn phone-btn">
+                            📞 Ara
+                        </a>
+                        ${milonga.email ? `<a href="mailto:${milonga.email}" class="contact-btn email-btn">
+                            ✉️ E-posta
+                        </a>` : ''}
+                        ${milonga.website ? `<a href="https://${milonga.website}" target="_blank" class="contact-btn website-btn">
+                            🌐 Website
+                        </a>` : ''}
+                    </div>
+                `;
+                
+                container.appendChild(milongaCard);
+            });
+        }
+
+        // Event listener'ları ekle
+        document.getElementById('cityFilter').addEventListener('change', filterMilongalar);
+        document.getElementById('dayFilter').addEventListener('change', filterMilongalar);
+        document.getElementById('searchInput').addEventListener('input', filterMilongalar);
+
+        // Sayfa yüklendiğinde milongaları getir
+        document.addEventListener('DOMContentLoaded', loadMilongalar);
+    </script>
+</body>
+</html>
