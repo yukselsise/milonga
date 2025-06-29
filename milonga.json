@@ -2,20 +2,21 @@
   "milongalar": [
     {
       "id": 1,
-      "ad": "Tango Noches İstanbul",
+      "ad": "Milonga Armada",
+      "mekan" : "Armada İstanbul Old City Hotel"
       "sehir": "İstanbul",
-      "semt": "Beyoğlu",
-      "adres": "Galata Kulesi Mah. Tango Sokak No:5",
-      "gun": "Cumartesi",
-      "saat": "21:00",
-      "bitisSaat": "02:00",
-      "ucret": "150 TL",
-      "telefon": "0212 555 0123",
-      "email": "info@tangonoches.com",
-      "website": "www.tangonoches.com",
-      "aciklama": "Her cumartesi muhteşem milonga gecesi. Profesyonel DJ ve harika atmosfer.",
+      "semt": "Fatih",
+      "adres": "Cankurtaran Mah. Ahırkapı Cad. No:10 34122 Fatih / İstanbul",
+      "gun": "Pazartesi",
+      "saat": "20:00",
+      "bitisSaat": "00:00",
+      "ucret": "",
+      "telefon": "+90 532 664 88 36",
+      "email": "serdar@tangoturk.com",
+      "website": "www.tangoturk.com",
+      "aciklama": "Türkiye'nin en eski klasik milongası",
       "aktif": true,
-      "resim": "https://example.com/tango1.jpg"
+      "resim": "https://www.armadahotel.com.tr/uploads/987835109233856.JPG"
     },
     {
       "id": 2,
