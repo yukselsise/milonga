@@ -1,0 +1,73 @@
+{
+  "milongalar": [
+    {
+      "id": 1,
+      "ad": "Tango Noches İstanbul",
+      "sehir": "İstanbul",
+      "semt": "Beyoğlu",
+      "adres": "Galata Kulesi Mah. Tango Sokak No:5",
+      "gun": "Cumartesi",
+      "saat": "21:00",
+      "bitisSaat": "02:00",
+      "ucret": "150 TL",
+      "telefon": "0212 555 0123",
+      "email": "info@tangonoches.com",
+      "website": "www.tangonoches.com",
+      "aciklama": "Her cumartesi muhteşem milonga gecesi. Profesyonel DJ ve harika atmosfer.",
+      "aktif": true,
+      "resim": "https://example.com/tango1.jpg"
+    },
+    {
+      "id": 2,
+      "ad": "Buenos Aires Gecesi",
+      "sehir": "Ankara",
+      "semt": "Kızılay",
+      "adres": "Atatürk Bulvarı No:125 Kızılay/Ankara",
+      "gun": "Pazar",
+      "saat": "20:00",
+      "bitisSaat": "24:00",
+      "ucret": "100 TL",
+      "telefon": "0312 555 0456",
+      "email": "info@buenosaires.com",
+      "website": "",
+      "aciklama": "Pazar akşamları samimi atmosferde tango keyfi. Başlangıç seviyesi hoş karşılanır.",
+      "aktif": true,
+      "resim": "https://example.com/tango2.jpg"
+    },
+    {
+      "id": 3,
+      "ad": "Tango Pasión İzmir",
+      "sehir": "İzmir",
+      "semt": "Alsancak",
+      "adres": "Kordon Boyu, Tango Salonu",
+      "gun": "Cuma",
+      "saat": "21:30",
+      "bitisSaat": "01:30",
+      "ucret": "120 TL",
+      "telefon": "0232 555 0789",
+      "email": "izmir@tangopasion.com",
+      "website": "www.tangopasion.com",
+      "aciklama": "Kordon manzaralı salonda unutulmaz tango geceleri.",
+      "aktif": true,
+      "resim": "https://example.com/tango3.jpg"
+    },
+    {
+      "id": 4,
+      "ad": "Milonga del Mar",
+      "sehir": "Antalya",
+      "semt": "Kaleiçi",
+      "adres": "Kaleiçi Marina yanı",
+      "gun": "Perşembe",
+      "saat": "20:30",
+      "bitisSaat": "23:30",
+      "ucret": "80 TL",
+      "telefon": "0242 555 0321",
+      "email": "antalya@milongadelmar.com",
+      "website": "",
+      "aciklama": "Marina manzaralı açık havada tango keyfi.",
+      "aktif": true,
+      "resim": "https://example.com/tango4.jpg"
+    }
+  ],
+  "sonGuncelleme": "2025-06-29T10:00:00Z"
+}
