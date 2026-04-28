@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Türkiye Milonga Rehberi / Turkey Milonga Directory</title>
-<meta name="description" content="Türkiye'deki milonga etkinlikleri / Milonga events in Turkey">
+<title>Türkiye Tango Rehberi / Turkey Tango Directory</title>
+<meta name="description" content="Türkiye'deki milonga, pratik, maraton ve festivaller / Milongas, practicas, marathons and festivals in Turkey">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -19,16 +19,18 @@
     --accent: #8C1C13;
     --accent-light: #F3EEEC;
     --border: #E8E5E0;
-    --border-hover: #C8C4BE;
     --serif: 'Cormorant Garamond', Georgia, serif;
     --sans: 'DM Sans', system-ui, sans-serif;
-    --radius: 2px;
+
+    /* tab accent colors */
+    --col-milonga:  #8C1C13;
+    --col-pratik:   #1C5C3A;
+    --col-maraton:  #1C3A6B;
+    --col-festival: #6B3A1C;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
-
   body {
     font-family: var(--sans);
     background: var(--bg);
@@ -38,13 +40,10 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* ── LANG TOGGLE ── */
+  /* ── LANG BAR ── */
   .lang-bar {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: flex-end;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: flex-end;
     padding: 14px 40px;
     background: rgba(249,247,244,0.92);
     backdrop-filter: blur(8px);
@@ -52,378 +51,252 @@
     transition: border-color 0.3s;
   }
   .lang-bar.scrolled { border-color: var(--border); }
-
-  .lang-toggle {
-    display: flex;
-    gap: 0;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    overflow: hidden;
-  }
+  .lang-toggle { display: flex; border: 1px solid var(--border); border-radius: 20px; overflow: hidden; }
   .lang-btn {
-    padding: 5px 14px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-family: var(--sans);
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--ink-light);
-    letter-spacing: 0.08em;
-    transition: all 0.2s;
+    padding: 5px 14px; background: none; border: none; cursor: pointer;
+    font-family: var(--sans); font-size: 12px; font-weight: 500;
+    color: var(--ink-light); letter-spacing: 0.08em; transition: all 0.2s;
   }
-  .lang-btn.active {
-    background: var(--ink);
-    color: var(--white);
-  }
+  .lang-btn.active { background: var(--ink); color: var(--white); }
 
   /* ── HERO ── */
   .hero {
-    padding: 120px 40px 70px;
-    max-width: 1100px;
-    margin: 0 auto;
+    padding: 120px 40px 60px;
+    max-width: 1100px; margin: 0 auto;
   }
-
   .hero-eyebrow {
-    font-family: var(--sans);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    color: var(--accent);
-    text-transform: uppercase;
-    margin-bottom: 24px;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.2em;
+    color: var(--accent); text-transform: uppercase; margin-bottom: 24px;
   }
-
   .hero h1 {
-    font-family: var(--serif);
-    font-weight: 300;
+    font-family: var(--serif); font-weight: 300;
     font-size: clamp(3em, 7vw, 5.5em);
-    line-height: 1.05;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-    margin-bottom: 28px;
+    line-height: 1.05; letter-spacing: -0.01em;
+    color: var(--ink); margin-bottom: 28px;
   }
-
-  .hero h1 em {
-    font-style: italic;
-    color: var(--accent);
-  }
-
+  .hero h1 em { font-style: italic; color: var(--accent); }
   .hero-sub {
-    font-size: 15px;
-    color: var(--ink-light);
-    max-width: 460px;
-    font-weight: 300;
-    margin-bottom: 50px;
+    font-size: 15px; color: var(--ink-light);
+    max-width: 480px; font-weight: 300; margin-bottom: 50px;
   }
-
   .stats-row {
-    display: flex;
-    gap: 48px;
-    padding-top: 32px;
-    border-top: 1px solid var(--border);
+    display: flex; gap: 48px;
+    padding-top: 32px; border-top: 1px solid var(--border);
     flex-wrap: wrap;
   }
-
-  .stat {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
+  .stat { display: flex; flex-direction: column; gap: 4px; }
   .stat-number {
-    font-family: var(--serif);
-    font-size: 2.4em;
-    font-weight: 300;
-    line-height: 1;
-    color: var(--ink);
+    font-family: var(--serif); font-size: 2.4em;
+    font-weight: 300; line-height: 1;
   }
   .stat-label {
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
+    font-size: 11px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink-faint);
   }
 
-  /* ── DIVIDER ── */
-  .divider {
-    height: 1px;
-    background: var(--border);
-    max-width: 1100px;
-    margin: 0 auto;
+  .divider { height: 1px; background: var(--border); max-width: 1100px; margin: 0 auto; }
+
+  /* ── TABS ── */
+  .tabs-wrap {
+    max-width: 1100px; margin: 0 auto;
+    padding: 0 40px;
+    border-bottom: 1px solid var(--border);
   }
+  .tabs {
+    display: flex; gap: 0; overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+
+  .tab-btn {
+    padding: 20px 24px 18px;
+    background: none; border: none; cursor: pointer;
+    font-family: var(--sans); font-size: 13px; font-weight: 500;
+    color: var(--ink-faint); letter-spacing: 0.04em;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: all 0.2s; white-space: nowrap;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .tab-btn:hover { color: var(--ink); }
+  .tab-btn.active { color: var(--ink); border-bottom-color: var(--ink); }
+  .tab-btn[data-tur="milonga"].active  { color: var(--col-milonga);  border-bottom-color: var(--col-milonga);  }
+  .tab-btn[data-tur="pratik"].active   { color: var(--col-pratik);   border-bottom-color: var(--col-pratik);   }
+  .tab-btn[data-tur="maraton"].active  { color: var(--col-maraton);  border-bottom-color: var(--col-maraton);  }
+  .tab-btn[data-tur="festival"].active { color: var(--col-festival); border-bottom-color: var(--col-festival); }
+
+  .tab-count {
+    font-size: 11px; font-weight: 400;
+    background: var(--border); color: var(--ink-light);
+    border-radius: 10px; padding: 1px 7px;
+    transition: all 0.2s;
+  }
+  .tab-btn.active .tab-count { background: currentColor; color: var(--white); }
 
   /* ── FILTERS ── */
   .filters {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 32px 40px;
-    display: flex;
-    gap: 16px;
-    align-items: center;
-    flex-wrap: wrap;
+    max-width: 1100px; margin: 0 auto;
+    padding: 24px 40px;
+    display: flex; gap: 16px; align-items: center; flex-wrap: wrap;
   }
-
   .filter-label {
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    margin-right: 4px;
+    font-size: 11px; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--ink-faint);
     white-space: nowrap;
   }
-
   .filter-select {
-    appearance: none;
-    -webkit-appearance: none;
+    appearance: none; -webkit-appearance: none;
     padding: 9px 32px 9px 14px;
-    border: 1px solid var(--border);
-    border-radius: 20px;
+    border: 1px solid var(--border); border-radius: 20px;
     background: var(--white) url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%236B6860' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 12px center;
-    font-family: var(--sans);
-    font-size: 13px;
-    color: var(--ink);
-    cursor: pointer;
-    transition: border-color 0.2s;
-    outline: none;
-    min-width: 160px;
+    font-family: var(--sans); font-size: 13px; color: var(--ink);
+    cursor: pointer; transition: border-color 0.2s; outline: none; min-width: 150px;
   }
   .filter-select:focus { border-color: var(--ink); }
 
-  .search-wrap {
-    flex: 1;
-    min-width: 220px;
-    position: relative;
-  }
+  .search-wrap { flex: 1; min-width: 200px; position: relative; }
   .search-wrap svg {
-    position: absolute;
-    left: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--ink-faint);
-    pointer-events: none;
+    position: absolute; left: 14px; top: 50%;
+    transform: translateY(-50%); color: var(--ink-faint); pointer-events: none;
   }
   .search-input {
-    width: 100%;
-    padding: 9px 14px 9px 38px;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    background: var(--white);
-    font-family: var(--sans);
-    font-size: 13px;
-    color: var(--ink);
-    outline: none;
-    transition: border-color 0.2s;
+    width: 100%; padding: 9px 14px 9px 38px;
+    border: 1px solid var(--border); border-radius: 20px;
+    background: var(--white); font-family: var(--sans);
+    font-size: 13px; color: var(--ink); outline: none; transition: border-color 0.2s;
   }
   .search-input::placeholder { color: var(--ink-faint); }
   .search-input:focus { border-color: var(--ink); }
 
-  /* ── GRID ── */
-  .grid-wrap {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 40px 80px;
-  }
+  /* hide filters for marathon/festival tabs */
+  .filters.date-mode .day-filter { display: none; }
 
-  .milonga-grid {
+  /* ── GRID ── */
+  .grid-wrap { max-width: 1100px; margin: 0 auto; padding: 0 40px 80px; }
+  .event-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 1px;
-    background: var(--border);
+    gap: 1px; background: var(--border);
     border: 1px solid var(--border);
   }
 
-  .milonga-card {
-    background: var(--white);
-    padding: 36px 32px;
+  .event-card {
+    background: var(--white); padding: 36px 32px;
     transition: background 0.25s;
-    cursor: default;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
+    display: flex; flex-direction: column;
+    animation: fadeUp 0.4s ease both;
   }
-  .milonga-card:hover { background: var(--accent-light); }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .event-card:hover { background: var(--accent-light); }
+  .event-card[data-tur="pratik"]:hover   { background: #EEF4F1; }
+  .event-card[data-tur="maraton"]:hover  { background: #EEF1F7; }
+  .event-card[data-tur="festival"]:hover { background: #F5F0EB; }
 
   .card-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 20px;
+    display: flex; justify-content: space-between;
+    align-items: flex-start; margin-bottom: 20px;
   }
-
   .card-city {
-    font-size: 10px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--accent);
-    font-weight: 500;
+    font-size: 10px; letter-spacing: 0.18em;
+    text-transform: uppercase; font-weight: 500;
   }
+  [data-tur="milonga"]  .card-city { color: var(--col-milonga);  }
+  [data-tur="pratik"]   .card-city { color: var(--col-pratik);   }
+  [data-tur="maraton"]  .card-city { color: var(--col-maraton);  }
+  [data-tur="festival"] .card-city { color: var(--col-festival); }
 
-  .card-day {
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
+  .card-type-badge {
+    font-size: 10px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink-faint);
   }
-
   .card-title {
-    font-family: var(--serif);
-    font-size: 1.75em;
-    font-weight: 400;
-    line-height: 1.15;
-    color: var(--ink);
-    margin-bottom: 6px;
+    font-family: var(--serif); font-size: 1.75em;
+    font-weight: 400; line-height: 1.15;
+    color: var(--ink); margin-bottom: 6px;
   }
-
   .card-venue {
-    font-size: 13px;
-    color: var(--ink-light);
-    margin-bottom: 20px;
-    font-weight: 300;
+    font-size: 13px; color: var(--ink-light);
+    font-weight: 300; margin-bottom: 20px;
   }
-
   .card-meta {
-    display: flex;
-    gap: 20px;
+    display: flex; gap: 20px; flex-wrap: wrap;
     padding: 16px 0;
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
     margin-bottom: 20px;
-    flex-wrap: wrap;
   }
-
-  .meta-item {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
+  .meta-item { display: flex; flex-direction: column; gap: 2px; }
   .meta-key {
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
+    font-size: 10px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink-faint);
   }
-  .meta-val {
-    font-size: 13px;
-    color: var(--ink);
-    font-weight: 400;
-  }
+  .meta-val { font-size: 13px; color: var(--ink); }
 
   .card-desc {
-    font-size: 13px;
-    color: var(--ink-light);
-    font-weight: 300;
-    line-height: 1.65;
-    margin-bottom: 24px;
-    flex: 1;
+    font-size: 13px; color: var(--ink-light);
+    font-weight: 300; line-height: 1.65;
+    margin-bottom: 24px; flex: 1;
   }
-
-  .card-actions {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-top: auto;
-  }
-
+  .card-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
   .action-btn {
-    padding: 7px 16px;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    font-family: var(--sans);
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--ink-light);
-    text-decoration: none;
-    background: transparent;
-    transition: all 0.2s;
-    letter-spacing: 0.02em;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
+    padding: 7px 16px; border: 1px solid var(--border);
+    border-radius: 20px; font-family: var(--sans);
+    font-size: 12px; font-weight: 500;
+    color: var(--ink-light); text-decoration: none; background: transparent;
+    transition: all 0.2s; letter-spacing: 0.02em;
+    display: inline-flex; align-items: center; gap: 5px;
   }
-  .action-btn:hover {
-    border-color: var(--ink);
-    color: var(--ink);
-    background: var(--white);
-  }
+  .action-btn:hover { border-color: var(--ink); color: var(--ink); background: var(--white); }
   .action-btn.primary {
-    background: var(--ink);
-    border-color: var(--ink);
-    color: var(--white);
+    background: var(--ink); border-color: var(--ink); color: var(--white);
   }
-  .action-btn.primary:hover {
-    background: var(--accent);
-    border-color: var(--accent);
-  }
+  .action-btn.primary:hover { opacity: 0.8; }
 
   /* ── STATES ── */
   .state-msg {
-    text-align: center;
-    padding: 80px 20px;
-    font-family: var(--serif);
-    font-size: 1.5em;
-    font-weight: 300;
-    color: var(--ink-faint);
-    font-style: italic;
+    text-align: center; padding: 80px 20px;
+    font-family: var(--serif); font-size: 1.5em;
+    font-weight: 300; color: var(--ink-faint); font-style: italic;
   }
-
   .loading-dots::after {
-    content: '';
-    display: inline-block;
+    content: ''; display: inline-block;
     animation: dots 1.4s infinite;
   }
   @keyframes dots {
-    0%,20% { content: '.'; }
+    0%,20%  { content: '.'; }
     40%,60% { content: '..'; }
-    80%,100% { content: '...'; }
+    80%,100%{ content: '...'; }
   }
 
   /* ── FOOTER ── */
   footer {
-    border-top: 1px solid var(--border);
-    padding: 32px 40px;
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: gap;
-    gap: 16px;
+    border-top: 1px solid var(--border); padding: 32px 40px;
+    max-width: 1100px; margin: 0 auto;
+    display: flex; justify-content: space-between;
+    align-items: center; flex-wrap: wrap; gap: 16px;
   }
   .footer-left {
-    font-family: var(--serif);
-    font-size: 1.1em;
-    font-weight: 300;
-    color: var(--ink-light);
-    font-style: italic;
+    font-family: var(--serif); font-size: 1.1em;
+    font-weight: 300; color: var(--ink-light); font-style: italic;
   }
-  .footer-right {
-    font-size: 12px;
-    color: var(--ink-faint);
-  }
+  .footer-right { font-size: 12px; color: var(--ink-faint); }
   .footer-right a {
-    color: var(--ink-light);
-    text-decoration: none;
-    border-bottom: 1px solid var(--border);
-    transition: border-color 0.2s;
+    color: var(--ink-light); text-decoration: none;
+    border-bottom: 1px solid var(--border); transition: border-color 0.2s;
   }
   .footer-right a:hover { border-color: var(--ink-light); }
-
-  /* ── FADE IN ── */
-  .milonga-card {
-    animation: fadeUp 0.4s ease both;
-  }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(12px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
 
   /* ── RESPONSIVE ── */
   @media (max-width: 640px) {
     .hero { padding: 90px 24px 48px; }
-    .filters { padding: 24px; gap: 12px; }
+    .tabs-wrap { padding: 0 24px; }
+    .filters { padding: 20px 24px; gap: 12px; }
     .grid-wrap { padding: 0 0 60px; }
-    .milonga-grid { grid-template-columns: 1fr; }
-    .milonga-card { padding: 28px 24px; }
+    .event-grid { grid-template-columns: 1fr; }
+    .event-card { padding: 28px 24px; }
     footer { padding: 28px 24px; flex-direction: column; align-items: flex-start; }
     .lang-bar { padding: 14px 24px; }
     .stats-row { gap: 28px; }
@@ -443,43 +316,77 @@
 <!-- HERO -->
 <section class="hero">
   <p class="hero-eyebrow" data-tr="Türkiye · Tango Topluluğu" data-en="Turkey · Tango Community">Türkiye · Tango Topluluğu</p>
-  <h1 data-tr="Milonga<br><em>Rehberi</em>" data-en="Milonga<br><em>Directory</em>">Milonga<br><em>Rehberi</em></h1>
-  <p class="hero-sub" data-tr="İstanbul ve Türkiye genelindeki milongaları keşfedin." data-en="Discover milongas across Istanbul and Turkey.">İstanbul ve Türkiye genelindeki milongaları keşfedin.</p>
+  <h1 data-tr="Tango<br><em>Rehberi</em>" data-en="Tango<br><em>Directory</em>">Tango<br><em>Rehberi</em></h1>
+  <p class="hero-sub"
+    data-tr="İstanbul ve Türkiye genelindeki milonga, pratik, maraton ve festivalleri keşfedin."
+    data-en="Discover milongas, practicas, marathons and festivals across Turkey.">
+    İstanbul ve Türkiye genelindeki milonga, pratik, maraton ve festivalleri keşfedin.
+  </p>
   <div class="stats-row">
     <div class="stat">
-      <span class="stat-number" id="totalMilongas">—</span>
+      <span class="stat-number" id="statMilonga">—</span>
       <span class="stat-label" data-tr="Milonga" data-en="Milongas">Milonga</span>
     </div>
     <div class="stat">
-      <span class="stat-number" id="totalCities">—</span>
-      <span class="stat-label" data-tr="Şehir" data-en="Cities">Şehir</span>
+      <span class="stat-number" id="statPratik">—</span>
+      <span class="stat-label" data-tr="Pratik" data-en="Practicas">Pratik</span>
     </div>
     <div class="stat">
-      <span class="stat-number" id="activeMilongas">—</span>
-      <span class="stat-label" data-tr="Aktif" data-en="Active">Aktif</span>
+      <span class="stat-number" id="statMaraton">—</span>
+      <span class="stat-label" data-tr="Maraton" data-en="Marathons">Maraton</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number" id="statFestival">—</span>
+      <span class="stat-label" data-tr="Festival" data-en="Festivals">Festival</span>
     </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
+<!-- TABS -->
+<div class="tabs-wrap">
+  <div class="tabs" role="tablist">
+    <button class="tab-btn active" data-tur="tumu" onclick="setTab('tumu')" role="tab">
+      <span data-tr="Tümü" data-en="All">Tümü</span>
+      <span class="tab-count" id="cnt-tumu">0</span>
+    </button>
+    <button class="tab-btn" data-tur="milonga" onclick="setTab('milonga')" role="tab">
+      <span data-tr="Milonga" data-en="Milonga">Milonga</span>
+      <span class="tab-count" id="cnt-milonga">0</span>
+    </button>
+    <button class="tab-btn" data-tur="pratik" onclick="setTab('pratik')" role="tab">
+      <span data-tr="Pratik" data-en="Practica">Pratik</span>
+      <span class="tab-count" id="cnt-pratik">0</span>
+    </button>
+    <button class="tab-btn" data-tur="maraton" onclick="setTab('maraton')" role="tab">
+      <span data-tr="Maraton" data-en="Marathon">Maraton</span>
+      <span class="tab-count" id="cnt-maraton">0</span>
+    </button>
+    <button class="tab-btn" data-tur="festival" onclick="setTab('festival')" role="tab">
+      <span data-tr="Festival" data-en="Festival">Festival</span>
+      <span class="tab-count" id="cnt-festival">0</span>
+    </button>
+  </div>
+</div>
+
 <!-- FILTERS -->
-<div class="filters">
+<div class="filters" id="filtersBar">
   <span class="filter-label" data-tr="Filtrele" data-en="Filter">Filtrele</span>
 
   <select id="cityFilter" class="filter-select" onchange="applyFilters()">
     <option value="" data-tr="Tüm Şehirler" data-en="All Cities">Tüm Şehirler</option>
   </select>
 
-  <select id="dayFilter" class="filter-select" onchange="applyFilters()">
+  <select id="dayFilter" class="filter-select day-filter" onchange="applyFilters()">
     <option value="" data-tr="Tüm Günler" data-en="All Days">Tüm Günler</option>
     <option value="Pazartesi" data-en="Monday">Pazartesi</option>
-    <option value="Salı" data-en="Tuesday">Salı</option>
-    <option value="Çarşamba" data-en="Wednesday">Çarşamba</option>
-    <option value="Perşembe" data-en="Thursday">Perşembe</option>
-    <option value="Cuma" data-en="Friday">Cuma</option>
+    <option value="Salı"      data-en="Tuesday">Salı</option>
+    <option value="Çarşamba"  data-en="Wednesday">Çarşamba</option>
+    <option value="Perşembe"  data-en="Thursday">Perşembe</option>
+    <option value="Cuma"      data-en="Friday">Cuma</option>
     <option value="Cumartesi" data-en="Saturday">Cumartesi</option>
-    <option value="Pazar" data-en="Sunday">Pazar</option>
+    <option value="Pazar"     data-en="Sunday">Pazar</option>
   </select>
 
   <div class="search-wrap">
@@ -487,26 +394,26 @@
       <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
     </svg>
     <input type="text" id="searchInput" class="search-input"
-      placeholder="Milonga veya semt ara…"
-      data-placeholder-tr="Milonga veya semt ara…"
-      data-placeholder-en="Search milonga or district…"
+      placeholder="Ara…"
+      data-placeholder-tr="Etkinlik veya semt ara…"
+      data-placeholder-en="Search event or district…"
       oninput="applyFilters()">
   </div>
 </div>
 
 <!-- GRID -->
 <div class="grid-wrap">
-  <div id="loading" class="state-msg loading-dots" data-tr="Yükleniyor" data-en="Loading">Yükleniyor</div>
-  <div id="error" class="state-msg" style="display:none" data-tr="Veriler yüklenemedi." data-en="Could not load data.">Veriler yüklenemedi.</div>
-  <div id="noResults" class="state-msg" style="display:none" data-tr="Sonuç bulunamadı." data-en="No results found.">Sonuç bulunamadı.</div>
-  <div id="milongalar" class="milonga-grid" style="display:none"></div>
+  <div id="loadingMsg" class="state-msg loading-dots" data-tr="Yükleniyor" data-en="Loading">Yükleniyor</div>
+  <div id="errorMsg"   class="state-msg" style="display:none" data-tr="Veriler yüklenemedi." data-en="Could not load data.">Veriler yüklenemedi.</div>
+  <div id="noResults"  class="state-msg" style="display:none" data-tr="Sonuç bulunamadı." data-en="No results found.">Sonuç bulunamadı.</div>
+  <div id="eventGrid"  class="event-grid" style="display:none"></div>
 </div>
 
 <div class="divider" style="max-width:1100px;margin:0 auto"></div>
 
 <!-- FOOTER -->
 <footer>
-  <span class="footer-left">Türkiye Milonga Rehberi</span>
+  <span class="footer-left">Türkiye Tango Rehberi</span>
   <span class="footer-right">
     <span data-tr="Kurator:" data-en="Curated by:">Kurator:</span>
     <a href="https://yukselsise.com" target="_blank">Yüksel Şişe</a>
@@ -516,42 +423,52 @@
 </footer>
 
 <script>
-// ─── STATE ──────────────────────────────────────────────────────
+// ─── STATE ───────────────────────────────────────────────────────
 let allData = [];
+let activeTab = 'tumu';
 let lang = 'tr';
 
 const DAYS_EN = {
   'Pazartesi':'Monday','Salı':'Tuesday','Çarşamba':'Wednesday',
   'Perşembe':'Thursday','Cuma':'Friday','Cumartesi':'Saturday','Pazar':'Sunday'
 };
+const TUR_LABELS = {
+  tr: { milonga:'Milonga', pratik:'Pratik', maraton:'Maraton', festival:'Festival' },
+  en: { milonga:'Milonga', pratik:'Practica', maraton:'Marathon', festival:'Festival' }
+};
+const DATE_ONLY_TABS = ['maraton', 'festival'];
 
-// ─── LANG ───────────────────────────────────────────────────────
+// ─── LANG ────────────────────────────────────────────────────────
 function setLang(l) {
   lang = l;
   document.documentElement.setAttribute('data-lang', l);
-  document.querySelectorAll('.lang-btn').forEach(b => {
-    b.classList.toggle('active', b.dataset.lang === l);
-  });
+  document.querySelectorAll('.lang-btn').forEach(b =>
+    b.classList.toggle('active', b.dataset.lang === l));
   document.querySelectorAll('[data-tr]').forEach(el => {
-    if (el.tagName === 'H1') {
-      el.innerHTML = el.getAttribute('data-' + l);
-    } else {
-      el.textContent = el.getAttribute('data-' + l);
-    }
+    if (el.tagName === 'H1') el.innerHTML = el.getAttribute('data-' + l);
+    else el.textContent = el.getAttribute('data-' + l);
   });
-  // placeholder
   const si = document.getElementById('searchInput');
   si.placeholder = si.getAttribute('data-placeholder-' + l);
-  // filter options
+  // day filter options
   document.querySelectorAll('#dayFilter option[data-en]').forEach(o => {
-    o.textContent = l === 'en' ? o.dataset.en : o.dataset.en
-      ? Object.keys(DAYS_EN).find(k => DAYS_EN[k] === o.dataset.en) || o.value
-      : o.textContent;
-    if (!o.value) o.textContent = l === 'tr' ? 'Tüm Günler' : 'All Days';
+    if (!o.value) { o.textContent = l === 'tr' ? 'Tüm Günler' : 'All Days'; return; }
+    o.textContent = l === 'en' ? o.dataset.en : o.value;
   });
   document.querySelector('#cityFilter option[value=""]').textContent =
     l === 'tr' ? 'Tüm Şehirler' : 'All Cities';
-  // re-render cards
+  applyFilters();
+}
+
+// ─── TAB ─────────────────────────────────────────────────────────
+function setTab(tur) {
+  activeTab = tur;
+  document.querySelectorAll('.tab-btn').forEach(b =>
+    b.classList.toggle('active', b.dataset.tur === tur));
+  // hide day filter for date-only tabs
+  const isDateMode = DATE_ONLY_TABS.includes(tur);
+  document.getElementById('filtersBar').classList.toggle('date-mode', isDateMode);
+  if (isDateMode) document.getElementById('dayFilter').value = '';
   applyFilters();
 }
 
@@ -561,28 +478,40 @@ async function loadData() {
     const res = await fetch('./milonga.json');
     if (!res.ok) throw new Error();
     const json = await res.json();
-    allData = (json.milongalar || []).filter(m => m.aktif);
+    allData = (json.etkinlikler || json.milongalar || []).filter(e => e.aktif);
 
     // stats
-    const cities = [...new Set(allData.map(m => m.sehir))];
-    document.getElementById('totalMilongas').textContent = allData.length;
-    document.getElementById('totalCities').textContent = cities.length;
-    document.getElementById('activeMilongas').textContent = allData.filter(m => m.aktif).length;
+    const count = t => allData.filter(e => e.tur === t).length;
+    document.getElementById('statMilonga').textContent  = count('milonga');
+    document.getElementById('statPratik').textContent   = count('pratik');
+    document.getElementById('statMaraton').textContent  = count('maraton');
+    document.getElementById('statFestival').textContent = count('festival');
 
     // city filter
+    const cities = [...new Set(allData.map(e => e.sehir))].sort();
     const cf = document.getElementById('cityFilter');
-    cities.sort().forEach(c => {
+    cities.forEach(c => {
       const o = document.createElement('option');
-      o.value = c; o.textContent = c;
-      cf.appendChild(o);
+      o.value = c; o.textContent = c; cf.appendChild(o);
     });
 
-    document.getElementById('loading').style.display = 'none';
+    document.getElementById('loadingMsg').style.display = 'none';
+    updateCounts(allData);
     applyFilters();
   } catch(e) {
-    document.getElementById('loading').style.display = 'none';
-    document.getElementById('error').style.display = 'block';
+    document.getElementById('loadingMsg').style.display = 'none';
+    document.getElementById('errorMsg').style.display = 'block';
   }
+}
+
+function updateCounts(data) {
+  const total = data.length;
+  const count = t => data.filter(e => e.tur === t).length;
+  document.getElementById('cnt-tumu').textContent    = total;
+  document.getElementById('cnt-milonga').textContent  = count('milonga');
+  document.getElementById('cnt-pratik').textContent   = count('pratik');
+  document.getElementById('cnt-maraton').textContent  = count('maraton');
+  document.getElementById('cnt-festival').textContent = count('festival');
 }
 
 // ─── FILTER ──────────────────────────────────────────────────────
@@ -591,20 +520,38 @@ function applyFilters() {
   const day  = document.getElementById('dayFilter').value;
   const q    = document.getElementById('searchInput').value.toLowerCase().trim();
 
-  const results = allData.filter(m => {
-    if (city && m.sehir !== city) return false;
-    if (day  && m.gun  !== day)  return false;
-    if (q && ![m.ad, m.semt, m.sehir, m.mekan||'', m.aciklama||'']
+  let results = allData.filter(e => {
+    if (activeTab !== 'tumu' && e.tur !== activeTab) return false;
+    if (city && e.sehir !== city) return false;
+    if (day  && e.gun   !== day)  return false;
+    if (q && ![e.ad, e.semt, e.sehir, e.mekan||'', e.aciklama||'']
                .some(s => s.toLowerCase().includes(q))) return false;
     return true;
   });
 
+  updateCounts(allData.filter(e => {
+    if (city && e.sehir !== city) return false;
+    if (day  && e.gun   !== day)  return false;
+    return true;
+  }));
+
   render(results);
+}
+
+// ─── FORMAT DATE ─────────────────────────────────────────────────
+function formatDateRange(start, end) {
+  if (!start) return '—';
+  const opts = { day: 'numeric', month: 'long', year: 'numeric' };
+  const locale = lang === 'tr' ? 'tr-TR' : 'en-GB';
+  const s = new Date(start).toLocaleDateString(locale, opts);
+  if (!end || end === start) return s;
+  const e = new Date(end).toLocaleDateString(locale, opts);
+  return `${s} – ${e}`;
 }
 
 // ─── RENDER ──────────────────────────────────────────────────────
 function render(list) {
-  const container = document.getElementById('milongalar');
+  const container = document.getElementById('eventGrid');
   const noRes     = document.getElementById('noResults');
 
   if (!list.length) {
@@ -617,46 +564,66 @@ function render(list) {
   container.style.display = 'grid';
   container.innerHTML = '';
 
-  list.forEach((m, i) => {
-    const dayLabel = lang === 'en' ? (DAYS_EN[m.gun] || m.gun) : m.gun;
-    const venueStr = m.mekan ? m.mekan : m.semt;
+  const isDateBased = e => DATE_ONLY_TABS.includes(e.tur);
 
+  list.forEach((e, i) => {
     const card = document.createElement('div');
-    card.className = 'milonga-card';
+    card.className = 'event-card';
+    card.setAttribute('data-tur', e.tur);
     card.style.animationDelay = (i * 40) + 'ms';
 
-    card.innerHTML = `
-      <div class="card-top">
-        <span class="card-city">${m.sehir}</span>
-        <span class="card-day">${dayLabel}</span>
-      </div>
-      <div class="card-title">${m.ad}</div>
-      <div class="card-venue">${venueStr}</div>
-      <div class="card-meta">
+    const turLabel = TUR_LABELS[lang][e.tur] || e.tur;
+    const dayLabel = lang === 'en' ? (DAYS_EN[e.gun] || e.gun || '') : (e.gun || '');
+    const venueStr = e.mekan || e.semt;
+
+    let metaHTML = '';
+    if (isDateBased(e)) {
+      metaHTML = `
+        <div class="meta-item">
+          <span class="meta-key">${lang==='tr'?'Tarih':'Date'}</span>
+          <span class="meta-val">${formatDateRange(e.baslangicTarihi, e.bitisTarihi)}</span>
+        </div>
+        ${e.sehir ? `<div class="meta-item">
+          <span class="meta-key">${lang==='tr'?'Şehir':'City'}</span>
+          <span class="meta-val">${e.sehir}</span>
+        </div>` : ''}
+      `;
+    } else {
+      metaHTML = `
         <div class="meta-item">
           <span class="meta-key">${lang==='tr'?'Saat':'Time'}</span>
-          <span class="meta-val">${m.saat}–${m.bitisSaat}</span>
+          <span class="meta-val">${e.saat}–${e.bitisSaat}</span>
         </div>
-        ${m.ucret ? `<div class="meta-item">
+        ${e.ucret ? `<div class="meta-item">
           <span class="meta-key">${lang==='tr'?'Giriş':'Entry'}</span>
-          <span class="meta-val">${m.ucret}</span>
+          <span class="meta-val">${e.ucret}</span>
         </div>` : ''}
         <div class="meta-item">
           <span class="meta-key">${lang==='tr'?'Semt':'District'}</span>
-          <span class="meta-val">${m.semt}</span>
+          <span class="meta-val">${e.semt}</span>
         </div>
+      `;
+    }
+
+    card.innerHTML = `
+      <div class="card-top">
+        <span class="card-city">${e.sehir}</span>
+        <span class="card-type-badge">${turLabel}</span>
       </div>
-      ${m.aciklama ? `<p class="card-desc">${m.aciklama}</p>` : ''}
+      <div class="card-title">${e.ad}</div>
+      <div class="card-venue">${venueStr}</div>
+      <div class="card-meta">${metaHTML}</div>
+      ${e.aciklama ? `<p class="card-desc">${e.aciklama}</p>` : ''}
       <div class="card-actions">
-        ${m.telefon ? `<a href="tel:${m.telefon}" class="action-btn primary">
+        ${e.telefon ? `<a href="tel:${e.telefon}" class="action-btn primary">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.47 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           ${lang==='tr'?'Ara':'Call'}
         </a>` : ''}
-        ${m.website ? `<a href="https://${m.website}" target="_blank" rel="noopener" class="action-btn">
+        ${e.website ? `<a href="${e.website.startsWith('http') ? e.website : 'https://'+e.website}" target="_blank" rel="noopener" class="action-btn">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
           Web
         </a>` : ''}
-        ${m.email ? `<a href="mailto:${m.email}" class="action-btn">
+        ${e.email ? `<a href="mailto:${e.email}" class="action-btn">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
           ${lang==='tr'?'E-posta':'Email'}
         </a>` : ''}
@@ -666,7 +633,7 @@ function render(list) {
   });
 }
 
-// ─── SCROLL HEADER SHADOW ────────────────────────────────────────
+// ─── SCROLL ──────────────────────────────────────────────────────
 window.addEventListener('scroll', () => {
   document.getElementById('langBar').classList.toggle('scrolled', window.scrollY > 10);
 });
