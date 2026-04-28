@@ -432,13 +432,44 @@ function setTab(tur) {
   applyFilters();
 }
 
+// ─── CSV PARSER ───────────────────────────────────────────────────
+function parseCSV(text) {
+  const lines = text.trim().split('\n');
+  const headers = lines[0].split(',').map(h => h.replace(/^"|"$/g,'').trim());
+  return lines.slice(1).map(line => {
+    // handle quoted fields with commas inside
+    const cols = [];
+    let cur = '', inQ = false;
+    for (let i = 0; i < line.length; i++) {
+      const ch = line[i];
+      if (ch === '"') { inQ = !inQ; }
+      else if (ch === ',' && !inQ) { cols.push(cur); cur = ''; }
+      else { cur += ch; }
+    }
+    cols.push(cur);
+    const obj = {};
+    headers.forEach((h, i) => {
+      let v = (cols[i] || '').trim();
+      if (v === 'TRUE')  v = true;
+      else if (v === 'FALSE') v = false;
+      else if (v !== '' && !isNaN(v) && h !== 'telefon' && h !== 'id') v = Number(v);
+      obj[h] = v;
+    });
+    return obj;
+  });
+}
+
 // ─── LOAD ─────────────────────────────────────────────────────────
+const SHEET_ID = '12iluP4y8wvFroJqM_kZK9ZT8JILIfpfN48ZquRIw20A';
+const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`;
+
 async function loadData() {
   try {
-    const res = await fetch('./milonga.json');
+    const res = await fetch(SHEET_URL);
     if (!res.ok) throw new Error();
-    const json = await res.json();
-    allData = (json.etkinlikler || json.milongalar || []).filter(e => e.aktif);
+    const csv  = await res.text();
+    const rows = parseCSV(csv);
+    allData = rows.filter(e => e.aktif === true);
 
     const count = t => allData.filter(e => e.tur === t).length;
     document.getElementById('statMilonga').textContent  = count('milonga');
